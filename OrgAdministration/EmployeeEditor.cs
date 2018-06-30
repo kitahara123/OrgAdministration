@@ -10,30 +10,24 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace OrgAdministration
 {
 	/// <summary>
-	/// Логика взаимодействия для MainWindow.xaml
+	/// Логика взаимодействия для Window1.xaml
 	/// </summary>
-	public partial class MainWindow : Window
+	public partial class EmployeeEditor : Window
 	{
-		List<Employee> employees = Employee.SetTestData();
-		
-		public MainWindow()
+		public EmployeeEditor(Employee selectedEmployee)
 		{
 			InitializeComponent();
-			employees.ForEach(e => People.Items.Add(e));
 
-		}
-
-		private void People_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-		{
+			List<Department> departments = Department.Deps.Values.ToList();
+			selectedEmp.Content = selectedEmployee;
+			departments.ForEach(e => Deps.Items.Add(e));
 			
-			EmployeeEditor a = new EmployeeEditor(People.SelectedItem as Employee);
-			a.ShowDialog();
 		}
+
 	}
 }
