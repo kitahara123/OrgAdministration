@@ -1,18 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace OrgAdministration
 {
-	public class Employee : Person
+	public class Employee : Person, INotifyPropertyChanged
 	{
+		public event PropertyChangedEventHandler PropertyChanged;
 		public int Salary { get; set; }
 		public int Grade { get; set; }
 		public String Position { get; set; }
-		public Department Dep { get; set; }
-		public Department jopa;
+		public PresenterEmployeeEditor MyPresenter { get; set; }
+
+		private Department dep;
+		public Department Dep // Проперти при смене которой я хочу чтобы перерисовывался лейбл с объектом
+		{
+			get { return this.dep; }
+			set
+			{
+				this.dep = value;
+
+				if(MyPresenter!=null)
+				PropertyChanged?.Invoke(MyPresenter, new PropertyChangedEventArgs("SelectedEmployee")); // Отправляю объект в котором нужная проперти и имя проперти
+			}
+		}	
 
 		public Employee(int salary, int grade, String position, int age, String name, DepName depName) : base(age, name)
 		{
@@ -38,6 +53,8 @@ namespace OrgAdministration
 
 			return l;
 		}
+
+		public string FullInfo { get =>this.ToString(); }
 
 		public override string ToString()
 		{

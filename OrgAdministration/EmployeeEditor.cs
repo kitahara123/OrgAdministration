@@ -17,16 +17,30 @@ namespace OrgAdministration
 	/// <summary>
 	/// Логика взаимодействия для Window1.xaml
 	/// </summary>
-	public partial class EmployeeEditor : Window
+	public partial class EmployeeEditor : Window, IView
 	{
+		BackEnd back;
+		public ItemCollection Data {
+			get => Deps.Items;
+		}
+		PresenterEmployeeEditor p;
 		public EmployeeEditor(Employee selectedEmployee)
 		{
 			InitializeComponent();
+			p = new PresenterEmployeeEditor();
+			selectedEmployee.MyPresenter = p;
+			p.SelectedEmployee = selectedEmployee;
 
-			List<Department> departments = Department.Deps.Values.ToList();
-			selectedEmp.Content = selectedEmployee;
-			departments.ForEach(e => Deps.Items.Add(e));
-			
+			empGrid.DataContext = p;
+
+			back = new BackEnd(this);
+			back.LoadData();
+
+		}
+
+		private void Deps_OnChange(object sender, SelectionChangedEventArgs e)
+		{
+			MessageBox.Show(p.SelectedEmployee.ToString());
 		}
 
 	}
