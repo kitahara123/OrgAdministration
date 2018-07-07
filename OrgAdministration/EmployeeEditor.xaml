@@ -5,12 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OrgAdministration"
         mc:Ignorable="d"
-        Title="EmployeeEditor" Height="450" Width="800">
-    <Grid x:Name="empGrid">
-		<ComboBox x:Name="Deps" HorizontalAlignment="Left" Margin="0,30,0,0" VerticalAlignment="Top" Width="120"  
-				  SelectedItem="{Binding Dep}" SelectionChanged="Deps_OnChange"/>
-		<Label Content="Выберите департамент для: " HorizontalAlignment="Left" Margin="0,-1,0,0" VerticalAlignment="Top"/>
-		<Label x:Name="selectedEmp" HorizontalAlignment="Left" Margin="171,0,0,0" VerticalAlignment="Top"
-			   Content="{Binding SelectedEmployee}"/>
+	Title="{Binding Name}" Height="300" Width="400"
+		Closed="EmployeeEditor_onClose">
+	<Grid x:Name="empGrid">
+		<TextBox HorizontalAlignment="Stretch" Height="23" Margin="104,10,0,0" TextWrapping="Wrap" Text="{Binding Name}" VerticalAlignment="Top">
+		</TextBox>
+		<Label Content="Имя:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+		<TextBox HorizontalAlignment="Stretch" Height="25" Margin="104,40,0,0" TextWrapping="Wrap" Text="{Binding Age}" VerticalAlignment="Top"/>
+		<Label Content="Возраст:" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top"/>
+		<TextBox HorizontalAlignment="Stretch" Height="23" Margin="104,75,0,0" TextWrapping="Wrap" Text="{Binding Position}" VerticalAlignment="Top"/>
+		<Label Content="Должность:" HorizontalAlignment="Left" Margin="10,75,0,0" VerticalAlignment="Top"/>
+		<TextBox HorizontalAlignment="Stretch" Height="25" Margin="104,105,0,0" TextWrapping="Wrap" Text="{Binding Grade}" VerticalAlignment="Top"/>
+		<Label Content="Грейд:" HorizontalAlignment="Left" Margin="10,105,0,0" VerticalAlignment="Top"/>
+		<TextBox HorizontalAlignment="Stretch" Height="23" Margin="104,135,0,0" TextWrapping="Wrap" Text="{Binding Salary}" VerticalAlignment="Top"/>
+		<Label Content="Зарплата:" HorizontalAlignment="Left" Margin="10,135,0,0" VerticalAlignment="Top"/>
+		<ComboBox x:Name="Deps" HorizontalAlignment="Stretch" Margin="104,170,0,0" VerticalAlignment="Top" 
+				 ItemsSource="{Binding Deps}" SelectedItem="{Binding Dep}"/>
+		<Label Content="Департамент:" HorizontalAlignment="Left" Margin="10,170,0,0" VerticalAlignment="Top"/>
+
 	</Grid>
 </Window>

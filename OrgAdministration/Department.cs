@@ -6,30 +6,29 @@ using System.Threading.Tasks;
 
 namespace OrgAdministration
 {
-	public enum DepName
-	{
-		IT, Cleaning, HR, Managers
-	}
 	public class Department
 	{
-		public static Dictionary<DepName, Department> Deps { get; }
-		public DepName name;
-		public List<Employee> EmployeeList { get; set; }
+		public static Dictionary<string, Department> Deps { get; }
+		public string name;
+		public HashSet<Employee> EmployeeList { get; set; }
 
-
+		public string Name { get => name.ToString(); set { } }
+		public int EmpCount { get => EmployeeList.Count; set { } }
+		
 		static Department()
 		{
-			Deps = new Dictionary<DepName, Department>();
+			Deps = new Dictionary<string, Department>();
 		}
-		private Department(DepName name)
+		private Department(string name)
 		{
 			this.name = name;
-			EmployeeList = new List<Employee>();
+			EmployeeList = new HashSet<Employee>();
 			Deps.Add(name, this);
 		}
 
-		public static Department GetDepByName(DepName name)
+		public static Department GetDepByName(string name)
 		{
+			if (null == name || "".Equals(name)) return null;
 			return Deps.ContainsKey(name) ? Deps[name] : new Department(name);
 		}
 		

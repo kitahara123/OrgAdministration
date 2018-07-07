@@ -18,26 +18,26 @@ namespace OrgAdministration
 	/// <summary>
 	/// Логика взаимодействия для MainWindow.xaml
 	/// </summary>
-	public partial class MainWindow : Window, IView
+	public partial class MainWindow : Window
 	{
-		public ItemCollection Data
-		{
-			get => People.Items;
-		}
-
-		BackEnd back;
+		PresenterMainWindow p;
 
 		public MainWindow()
 		{
 			InitializeComponent();
-			back = new BackEnd(this);
-			back.LoadData();
-
+			MainGrid.DataContext = p = new PresenterMainWindow();
+			
 		}
 
 
 		private void People_MouseDoubleClick(object sender, MouseButtonEventArgs e) =>
 						new EmployeeEditor(People.SelectedItem as Employee).ShowDialog();
+
+		private void AddEmployee_Click(object sender, RoutedEventArgs e) =>
+						new EmployeeEditor().ShowDialog();
+
+		private void Departments_Click(object sender, RoutedEventArgs e) =>
+						new DepartmentEditor().ShowDialog();
 
 	}
 }

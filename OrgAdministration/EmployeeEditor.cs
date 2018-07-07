@@ -17,13 +17,11 @@ namespace OrgAdministration
 	/// <summary>
 	/// Логика взаимодействия для Window1.xaml
 	/// </summary>
-	public partial class EmployeeEditor : Window, IView
+	public partial class EmployeeEditor : Window
 	{
-		BackEnd back;
-		public ItemCollection Data {
-			get => Deps.Items;
-		}
+		
 		PresenterEmployeeEditor p;
+
 		public EmployeeEditor(Employee selectedEmployee)
 		{
 			InitializeComponent();
@@ -32,14 +30,20 @@ namespace OrgAdministration
 
 			empGrid.DataContext = p;
 
-			back = new BackEnd(this);
-			back.LoadData();
+		}
+
+		public EmployeeEditor()
+		{
+			InitializeComponent();
+			p = new PresenterEmployeeEditor();
+			empGrid.DataContext = p;
 
 		}
 
-		private void Deps_OnChange(object sender, SelectionChangedEventArgs e)
+		private void EmployeeEditor_onClose(object sender, EventArgs e)
 		{
-			MessageBox.Show(p.SelectedEmployee.ToString());
+			p.SelectedEmployee.FullInfo = "nu i debilizm"; // Я НЕ ПОНИМАЮ КАК ЭТО СДЕЛАТЬ ПРАВИЛЬНО
+
 		}
 
 	}

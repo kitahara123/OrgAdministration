@@ -6,8 +6,18 @@
         xmlns:local="clr-namespace:OrgAdministration"
         mc:Ignorable="d"
         Title="MainWindow" Height="800" Width="1400">
-	<Grid>
-		<ListView x:Name="People" HorizontalAlignment="Left" VerticalAlignment="Top" MouseDoubleClick="People_MouseDoubleClick" FontSize="20">
+	<Grid x:Name="MainGrid">
+		<ListView x:Name="People" HorizontalAlignment="Left" VerticalAlignment="Top" MouseDoubleClick="People_MouseDoubleClick" FontSize="20"
+				  ItemsSource="{Binding Path=Employees}">
+			<ListView.ItemTemplate>
+				<DataTemplate>
+					<TextBlock Text="{Binding FullInfo}"/>
+				</DataTemplate>
+			</ListView.ItemTemplate>
 		</ListView>
+		<Button Content="Новый сотрудник" HorizontalAlignment="Left" Margin="1126,0,0,0" VerticalAlignment="Top" Width="256" Height="70"
+				Click="AddEmployee_Click"/>
+		<Button Content="Департаменты" HorizontalAlignment="Left" Margin="1126,90,0,0" VerticalAlignment="Top" Width="256" Height="70"
+				Click="Departments_Click"/>
 	</Grid>
 </Window>

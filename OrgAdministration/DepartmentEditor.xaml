@@ -1,0 +1,22 @@
+﻿<Window x:Class="OrgAdministration.DepartmentEditor"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OrgAdministration"
+        mc:Ignorable="d"
+        Title="DepartmentEditor" Height="450" Width="450">
+	<Grid x:Name="DepGrid">
+		<ListView x:Name="Deps" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20" Width="300"
+				  ItemsSource="{Binding Path=Deps}">
+			<ListView.ItemTemplate>
+				<DataTemplate>
+					<TextBox Text="{Binding Name}"/>
+				</DataTemplate>
+			</ListView.ItemTemplate>
+		</ListView>
+		<Button Content="Новый департамент" HorizontalAlignment="Left" Margin="307,32,-112,0" VerticalAlignment="Top" Width="125" Height="60"
+				Click="AddDep_Click"/>
+		<TextBox x:Name="newDepName" HorizontalAlignment="Left" Height="23" Margin="320,4,-112,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="112"/>
+	</Grid>
+</Window>

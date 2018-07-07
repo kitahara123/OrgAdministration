@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -7,21 +8,70 @@ using System.Threading.Tasks;
 
 namespace OrgAdministration
 {
-	public class PresenterEmployeeEditor: INotifyPropertyChanged
+	public class PresenterEmployeeEditor : INotifyPropertyChanged
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
 
-		public Employee SelectedEmployee { get; set; }
+		public ObservableCollection<Department> Deps { get => deps; set => deps = value; }
+		ObservableCollection<Department> deps;
 
-		public Department Dep // Проперти при смене которой я хочу чтобы перерисовывался лейбл с объектом
 
-		{ 
-			get => SelectedEmployee.Dep;
-			set 
+		private Employee employee;
+		public Employee SelectedEmployee
+		{
+			get
 			{
-				SelectedEmployee.Dep = value;
-				PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SelectedEmployee"));
-			}
+				if (employee == null)
+				{
+					employee = new Employee();
+					Model.Employees.Add(employee);
+					return employee;
+				}
+				return employee;
+			} set => employee = value;
 		}
+
+
+		public PresenterEmployeeEditor()
+		{
+			deps = Model.GetDeps();
+		}
+
+		public string FullInfo => SelectedEmployee.FullInfo; 
+
+		public string Name
+		{
+			get => SelectedEmployee.name;
+			set => SelectedEmployee.name = value;
+		}
+
+		public int Age
+		{
+			get => SelectedEmployee.age;
+			set => SelectedEmployee.age = value;
+		}
+
+		public string Position
+		{
+			get => SelectedEmployee.Position;
+			set => SelectedEmployee.Position = value;
+		}
+		public int Grade
+		{
+			get => SelectedEmployee.Grade;
+			set => SelectedEmployee.Grade = value;
+		}
+		public int Salary
+		{
+			get => SelectedEmployee.Salary;
+			set => SelectedEmployee.Salary = value;
+		}
+
+		public Department Dep
+		{
+			get => SelectedEmployee.Dep;
+			set => SelectedEmployee.Dep = value;
+		}
+
 	}
 }
