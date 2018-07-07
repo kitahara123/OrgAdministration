@@ -8,7 +8,7 @@
         Title="EmployeeEditor" Height="450" Width="800">
     <Grid x:Name="empGrid">
 		<ComboBox x:Name="Deps" HorizontalAlignment="Left" Margin="0,30,0,0" VerticalAlignment="Top" Width="120"  
-				  SelectedItem="{Binding ElementName=selectedEmp, Path=Content.Dep, Mode=TwoWay}" SelectionChanged="Deps_OnChange"/>
+				  SelectedItem="{Binding Dep}" SelectionChanged="Deps_OnChange"/>
 		<Label Content="Выберите департамент для: " HorizontalAlignment="Left" Margin="0,-1,0,0" VerticalAlignment="Top"/>
 		<Label x:Name="selectedEmp" HorizontalAlignment="Left" Margin="171,0,0,0" VerticalAlignment="Top"
 			   Content="{Binding SelectedEmployee}"/>

@@ -8,24 +8,21 @@ using System.Threading.Tasks;
 
 namespace OrgAdministration
 {
-	public class Employee : Person, INotifyPropertyChanged
+	public class Employee : Person
 	{
-		public event PropertyChangedEventHandler PropertyChanged;
+		
 		public int Salary { get; set; }
 		public int Grade { get; set; }
 		public String Position { get; set; }
-		public PresenterEmployeeEditor MyPresenter { get; set; }
 
 		private Department dep;
-		public Department Dep // Проперти при смене которой я хочу чтобы перерисовывался лейбл с объектом
+		public Department Dep 
 		{
 			get { return this.dep; }
 			set
 			{
 				this.dep = value;
-
-				if(MyPresenter!=null)
-				PropertyChanged?.Invoke(MyPresenter, new PropertyChangedEventArgs("SelectedEmployee")); // Отправляю объект в котором нужная проперти и имя проперти
+				 				
 			}
 		}	
 

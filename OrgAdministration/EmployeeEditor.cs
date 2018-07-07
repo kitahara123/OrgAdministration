@@ -28,7 +28,6 @@ namespace OrgAdministration
 		{
 			InitializeComponent();
 			p = new PresenterEmployeeEditor();
-			selectedEmployee.MyPresenter = p;
 			p.SelectedEmployee = selectedEmployee;
 
 			empGrid.DataContext = p;
