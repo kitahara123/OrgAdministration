@@ -14,7 +14,9 @@ namespace OrgAdministration
 
 		public PresenterMainWindow()
 		{
-			Employees = Model.GetEmployees();
+			Model.LoadDepartments();
+			Model.LoadPeople();
+			Employees = Model.Employees;
 		}
 
 		

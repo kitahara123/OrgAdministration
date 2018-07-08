@@ -8,9 +8,8 @@ using System.Threading.Tasks;
 
 namespace OrgAdministration
 {
-	public class PresenterEmployeeEditor : INotifyPropertyChanged
+	public class PresenterEmployeeEditor
 	{
-		public event PropertyChangedEventHandler PropertyChanged;
 
 		public ObservableCollection<Department> Deps { get => deps; set => deps = value; }
 		ObservableCollection<Department> deps;
@@ -28,27 +27,28 @@ namespace OrgAdministration
 					return employee;
 				}
 				return employee;
-			} set => employee = value;
+			}
+			set => employee = value;
 		}
 
 
 		public PresenterEmployeeEditor()
 		{
-			deps = Model.GetDeps();
+			deps = Model.Deps;
 		}
 
-		public string FullInfo => SelectedEmployee.FullInfo; 
+		public string FullInfo => SelectedEmployee.FullInfo;
 
 		public string Name
 		{
-			get => SelectedEmployee.name;
-			set => SelectedEmployee.name = value;
+			get => SelectedEmployee.Name;
+			set => SelectedEmployee.Name = value;
 		}
 
 		public int Age
 		{
-			get => SelectedEmployee.age;
-			set => SelectedEmployee.age = value;
+			get => SelectedEmployee.Age;
+			set => SelectedEmployee.Age = value;
 		}
 
 		public string Position

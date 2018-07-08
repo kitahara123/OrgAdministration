@@ -10,31 +10,45 @@ namespace OrgAdministration
 {
 	public class Employee : Person, INotifyPropertyChanged
 	{
-		
-		public int Salary { get; set; }
-		public int Grade { get; set; }
-		public String Position { get; set; }
-
-		private Department dep;
-
 		public event PropertyChangedEventHandler PropertyChanged;
 
-		public Department Dep 
+		public bool Changed { get; set; }
+		public int id;
+		private string position;
+		private int salary;
+		private int grade;
+		private Department dep;
+
+		public string Name { get => name; set { name = value; Changed = true; } }
+		public int Age { get => age; set { age = value; Changed = true; } }
+		public string Position { get => position; set { position = value; Changed = true; } }
+		public int Grade { get => grade; set { grade = value; Changed = true; } }
+		public int Salary { get => salary; set { salary = value; Changed = true; } }
+
+		public Department Dep
 		{
-			get { return this.dep; }
+			get => dep;
 			set
 			{
 				value.EmployeeList.Add(this);
-				this.dep = value;	 				
+				this.dep = value;
+				Changed = true;
 			}
-		}	
+		}
 
-		public Employee(int salary, int grade, String position, int age, String name, string depName) : base(age, name)
+		public Employee(string name, int age, string position, int grade, int salary, string depName) : base(age, name)
 		{
 			Salary = salary;
 			Grade = grade;
 			Position = position;
 			Dep = Department.GetDepByName(depName);
+		}
+
+		public Employee(int id, string name, int age, string position, int grade, int salary, int depId)
+			: this(name, age, position, grade, salary, Department.GetDepById(depId).Name)
+		{
+			Changed = false;
+			this.id = id;
 		}
 
 		public Employee()
@@ -46,28 +60,31 @@ namespace OrgAdministration
 		{
 			ObservableCollection<Employee> l = new ObservableCollection<Employee>
 			{
-				new Employee(30000, 1, "Janitor", 36, "Jan Itor", "Cleaning"),
-				new Employee(40000, 2, "Middle Janitor", 42, "Kevin", "Cleaning"),
-				new Employee(60000, 3, "Developer", 23, "Pasha", "IT"),
-				new Employee(100000, 5, "Team Lead", 36, "Alexey", "IT"),
-				new Employee(80000, 4, "DevOps", 28, "Misha", "IT"),
-				new Employee(70000, 4, "HR Generalist", 29, "Katerina", "HR"),
-				new Employee(120000, 6, "Project Manager", 40, "Sergey Sergeich", "Managers")
+				new Employee("Jan Itor", 36, "Janitor", 1, 30000, "Cleaning"),
+				new Employee("Kevin", 42, "Middle Janitor",  2, 40000, "Cleaning"),
+				new Employee("Pasha", 23, "Developer", 3, 60000, "IT"),
+				new Employee("Alexey", 36, "Team Lead",  5, 100000, "IT"),
+				new Employee("Misha", 28, "DevOps",  4, 80000, "IT"),
+				new Employee("Katerina",  29, "HR Generalist", 4, 70000, "HR"),
+				new Employee("Sergey Sergeich", 40, "Project Manager",  6, 120000, "Managers")
 			};
 
 			return l;
 		}
 
-		public string FullInfo { get =>this.ToString();
+		public string FullInfo
+		{
+			get => this.ToString();
 			set
 			{
 				PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("FullInfo"));
 			}
 		}
 
+
 		public override string ToString()
 		{
-			return $"Сотрудник: {name} Возраст: {age} Должность: {Position} Зарплата: {Salary} Grade: {Grade} Департамент: {Dep?.name}";
+			return $"Сотрудник: {name} Возраст: {age} Должность: {Position} Grade: {Grade} Зарплата: {Salary} Департамент: {Dep?.name}";
 		}
 	}
 }

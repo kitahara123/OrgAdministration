@@ -39,5 +39,25 @@ namespace OrgAdministration
 		private void Departments_Click(object sender, RoutedEventArgs e) =>
 						new DepartmentEditor().ShowDialog();
 
+		private void SetTestData_Click(object sender, RoutedEventArgs e) =>
+				Model.SetTestData();
+
+		private void MainWindow_OnClose(object sender, EventArgs e)
+		{
+			Model.SaveDeps();
+			Model.SavePeople();
+		}
+		private void Employee_Delete(object sender, EventArgs e)
+		{
+			Employee emp = People.SelectedItem as Employee;
+			if (emp != null)
+			{
+				Model.Employees.Remove(emp);
+				Model.deletedEmps.Add(emp);
+			}
+			
+			
+		}
+
 	}
 }

@@ -16,17 +16,13 @@ namespace OrgAdministration
 
 		public PresenterDepartmentEditor()
 		{
-			deps = Model.GetDeps();
+			deps = Model.Deps;
 		}
 		public void AddNewDep(string newName)
 		{
-			if ("".Equals(newName)) return;
-			int cntBefore = Department.Deps.Count();
-			Department d = Department.GetDepByName(newName);
-			int cntAfter = Department.Deps.Count();
+			if ("".Equals(newName) || Department.GetDepByName(newName) != null) return;
+			Deps.Add(new Department(newName));
 
-			if (cntAfter > cntBefore)
-			Deps.Add(d);
 		}
 	}
 }

@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OrgAdministration"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="1400">
+        Title="MainWindow" Height="800" Width="1400"
+		Closed="MainWindow_OnClose">
 	<Grid x:Name="MainGrid">
 		<ListView x:Name="People" HorizontalAlignment="Left" VerticalAlignment="Top" MouseDoubleClick="People_MouseDoubleClick" FontSize="20"
 				  ItemsSource="{Binding Path=Employees}">
@@ -19,5 +20,9 @@
 				Click="AddEmployee_Click"/>
 		<Button Content="Департаменты" HorizontalAlignment="Left" Margin="1126,90,0,0" VerticalAlignment="Top" Width="256" Height="70"
 				Click="Departments_Click"/>
+		<Button Content="TestData" HorizontalAlignment="Left" Margin="1126,303,0,0" VerticalAlignment="Top" Width="256" Height="120"
+				Click="SetTestData_Click"/>
+		<Button Content="Удалить" HorizontalAlignment="Left" Margin="1126,181,0,0" VerticalAlignment="Top" Width="256" Height="99"
+				Click="Employee_Delete"/>
 	</Grid>
 </Window>
