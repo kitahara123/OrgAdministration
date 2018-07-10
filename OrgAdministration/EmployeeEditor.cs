@@ -15,13 +15,12 @@ using System.Windows.Shapes;
 namespace OrgAdministration
 {
 	/// <summary>
-	/// Логика взаимодействия для Window1.xaml
+	/// Логика взаимодействия для EmployeeEditor.xaml
 	/// </summary>
 	public partial class EmployeeEditor : Window
 	{
-		
-		PresenterEmployeeEditor p;
 
+		PresenterEmployeeEditor p;
 		public EmployeeEditor(Employee selectedEmployee)
 		{
 			InitializeComponent();
@@ -40,9 +39,12 @@ namespace OrgAdministration
 
 		}
 
+		/// <summary>
+		/// При закрытии обновляет контрол в списке работников
+		/// </summary>
 		private void EmployeeEditor_onClose(object sender, EventArgs e)
 		{
-			p.SelectedEmployee.FullInfo = "nu i debilizm"; // Я НЕ ПОНИМАЮ КАК ЭТО СДЕЛАТЬ ПРАВИЛЬНО
+			p.SelectedEmployee.InfoUpdated();
 
 		}
 

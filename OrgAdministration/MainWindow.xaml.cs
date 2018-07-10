@@ -40,20 +40,19 @@ namespace OrgAdministration
 						new DepartmentEditor().ShowDialog();
 
 		private void SetTestData_Click(object sender, RoutedEventArgs e) =>
-				Model.SetTestData();
+				p.SetTestData();
 
 		private void MainWindow_OnClose(object sender, EventArgs e)
 		{
-			Model.SaveDeps();
-			Model.SavePeople();
+			p.SaveData();
+
 		}
 		private void Employee_Delete(object sender, EventArgs e)
 		{
 			Employee emp = People.SelectedItem as Employee;
 			if (emp != null)
 			{
-				Model.Employees.Remove(emp);
-				Model.deletedEmps.Add(emp);
+				p.deleteEmployee(emp);
 			}
 			
 			

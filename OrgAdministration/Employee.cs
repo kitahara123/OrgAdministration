@@ -77,8 +77,11 @@ namespace OrgAdministration
 			get => this.ToString();
 			set
 			{
-				PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("FullInfo"));
 			}
+		}
+		public void InfoUpdated()
+		{
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("FullInfo"));
 		}
 
 

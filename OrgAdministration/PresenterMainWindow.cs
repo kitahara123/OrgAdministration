@@ -19,6 +19,21 @@ namespace OrgAdministration
 			Employees = Model.Employees;
 		}
 
-		
+		internal void SaveData()
+		{
+			Model.SaveDeps();
+			Model.SavePeople();
+		}
+
+		internal void deleteEmployee(Employee emp)
+		{
+			Model.Employees.Remove(emp);
+			Model.deletedEmps.Add(emp);
+		}
+
+		internal void SetTestData()
+		{
+			Model.SetTestData();
+		}
 	}
 }
