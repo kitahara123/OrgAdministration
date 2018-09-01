@@ -44,7 +44,7 @@ namespace OrgAdministration
 		}
 		public static Department GetDepByName(string name)
 		{
-			if (Model.Deps.Where(e => name.Equals(e.name)).Count() == 0) return null;
+			if (Model.Deps.Where(e => name.Equals(e.name)).Count() == 0) return Model.Deps[0];
 			return Model.Deps.Where(e => name.Equals(e.name)).First();
 		}
 

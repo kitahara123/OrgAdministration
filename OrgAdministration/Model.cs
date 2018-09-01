@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Xml;
@@ -36,12 +37,16 @@ namespace OrgAdministration
 			string url = @"http://localhost:62107/api/deps";
 			var response = client.GetStringAsync(url).Result;
 
+			int cnt = Regex.Matches(response, "ArrayOfDepartment").Count; // Вот такое говно приходится делать из-за того что нет адекватного способа удалить NS
 			int st = ("<ArrayOfDepartment").Length;
-			int ed = response.IndexOf(">") - st;
+			string edSym;
+			if (cnt == 1) edSym = "/>";
+			else edSym = ">";
 
-			string fuckNs = response.Remove(st, ed); //обращение по имени Element("Name") не работает если не добавить NS, так что удалим их вообще из документа
+			int ed = response.IndexOf(edSym) - st;
+			string noNs = response.Remove(st, ed); //обращение по имени Element("Name") не работает если не добавить NS, так что удалим их вообще из документа
 
-			XDocument doc = XDocument.Parse(fuckNs);
+			XDocument doc = XDocument.Parse(noNs);
 
 			var col = from dep in doc.Root.Elements("Department")
 					  select new Department(
@@ -70,13 +75,16 @@ namespace OrgAdministration
 			string url = @"http://localhost:62107/api/people";
 			var response = client.GetStringAsync(url).Result;
 
-			int st = ("<ArrayOfEmployee").Length;
-			int ed = response.IndexOf(">") - st;
+			int cnt = Regex.Matches(response, "ArrayOfEmployee").Count; // Вот такое говно приходится делать из-за того что нет адекватного способа удалить NS
+			int st = ("<ArrayOfEmployee").Length; 
+			string edSym;
+			if (cnt == 1) edSym = "/>";
+			else edSym = ">";
 
-			string fuckNs = response.Remove(st, ed); //обращение по имени Element("Name") не работает если не добавить NS, так что удалим их вообще из документа
-			Trace.WriteLine(fuckNs);
-			XDocument doc = XDocument.Parse(fuckNs);
+			int ed = response.IndexOf(edSym) - st;
 
+			string noNs = response.Remove(st, ed); //обращение по имени Element("Name") не работает если не добавить NS, так что удалим их вообще из документа
+			XDocument doc = XDocument.Parse(noNs);
 			var col = from dep in doc.Root.Elements("Employee")
 					  select new Employee(
 						  Convert.ToInt32(dep.Element("id")?.Value),
